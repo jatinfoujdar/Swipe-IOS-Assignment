@@ -20,3 +20,37 @@ struct Product: Identifiable,Decodable{
         }
     
 }
+
+
+
+class ProductViewModel {
+    @Published var products: [Product] = []
+    
+    func fetchProducts(url: String) {
+        guard let url = URL(string: url) else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error fetching products: \(error)")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            do {
+                let products = try JSONDecoder().decode([Product].self, from: data)
+                DispatchQueue.main.async {
+                    self.products = products
+                }
+            } catch {
+                print("Error parsing products: \(error)")
+            }
+        }.resume()
+    }
+}
