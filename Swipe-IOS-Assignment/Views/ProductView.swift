@@ -23,6 +23,7 @@ struct ProductView: View {
     }
     
     var body: some View {
+        HeaderView()
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
@@ -43,9 +44,12 @@ struct ProductView: View {
                             }
                             
                             Text(product.productName)
-                                .font(.title2)
+                                .fontWeight(Font.Weight.heavy)
+                            
                             Text("Price: \(String(format: "%.2f", product.price))")
-                                .foregroundColor(.secondary)
+                                .font(Font.custom("HelveticaNeue-Bold", size: 16))
+                                .foregroundColor(Color.gray)
+                            
                             Text("Type: \(product.productType)")
                                 .foregroundColor(.secondary)
                             Text("Tax: \(String(format: "%.2f", product.tax))")
@@ -62,8 +66,9 @@ struct ProductView: View {
             .onAppear {
                 viewModel.fetchProducts(url: url)
             }
+            
             .searchable(text: $searchText)
-            .navigationTitle("Products")
+            HeaderView()
         }
     }
 }
