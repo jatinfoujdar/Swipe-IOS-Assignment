@@ -12,6 +12,7 @@ struct ProductView: View {
     ]
     
     var body: some View {
+        
         ScrollView {
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(viewModel.products, id: \.id) { product in
@@ -35,6 +36,8 @@ struct ProductView: View {
                         Text("Price: \(String(format: "%.2f", product.price))")
                             .foregroundColor(.secondary)
                         Text("Type: \(product.productType)")
+                            .foregroundColor(.secondary)
+                        Text("Tax: \(String(format: "%.2f", product.tax))")
                             .foregroundColor(.secondary)
                     }
                     .padding()
