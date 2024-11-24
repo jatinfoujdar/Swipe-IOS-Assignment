@@ -1,11 +1,10 @@
-// ProductViewModel.swift
-
 import Foundation
 import Combine
 
 class ProductViewModel: ObservableObject {
     @Published var products: [Product] = []
     private var cancellables = Set<AnyCancellable>()
+    
     
     func fetchProducts(url: String) {
         guard let url = URL(string: url) else {
@@ -15,6 +14,7 @@ class ProductViewModel: ObservableObject {
         
         URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { data, response -> [Product] in
+               
                 return try JSONDecoder().decode([Product].self, from: data)
             }
             .receive(on: RunLoop.main)
@@ -26,5 +26,12 @@ class ProductViewModel: ObservableObject {
                 self?.products = products
             })
             .store(in: &cancellables)
+    }
+    
+  
+    func toggleFavorite(for product: Product) {
+        if let index = products.firstIndex(where: { $0.id == product.id }) {
+            products[index].isFavorited.toggle()
+        }
     }
 }

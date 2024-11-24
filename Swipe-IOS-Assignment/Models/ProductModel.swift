@@ -9,7 +9,7 @@ struct Product: Identifiable,Decodable{
     let productName: String
     let productType: String
     let tax: Double
-    
+    var isFavorited = false
     
     enum CodingKeys: String, CodingKey {
     case image

@@ -3,9 +3,11 @@ import SwiftUI
 struct ProductView: View {
     @StateObject var viewModel = ProductViewModel()
     @State private var searchText = ""
+    @State private var favourite = false
     
     let url: String = "https://app.getswipe.in/api/public/get"
-    
+
+
       enum SortOption: String, CaseIterable {
         case name = "Name"
         case price = "Price"
@@ -66,17 +68,22 @@ struct ProductView: View {
                                         .resizable()
                                         .frame(width: 150, height: 150)
                                         .cornerRadius(10)
+                                    
                                 } else {
                                     Image(systemName: "photo")
                                         .resizable()
                                         .frame(width: 150, height: 150)
                                         .cornerRadius(10)
+                                    
                                 }
                                 
-                                Text(product.productName)
-                                    .fontWeight(.heavy)
-                                
-                                Text("Price: \(String(format: "%.2f", product.price))")
+                                HStack {
+                                    Text(product.productName)
+                                        .fontWeight(.heavy)
+                                    Spacer()
+                                    Image(systemName: "heart")
+
+                                };                                 Text("Price: \(String(format: "%.2f", product.price))")
                                     .font(.custom("HelveticaNeue-Bold", size: 16))
                                     .foregroundColor(Color.gray)
                                 
