@@ -38,8 +38,8 @@ struct ProductView: View {
     var filteredProducts: [Product] {
         let filtered = viewModel.products.filter { product in
             searchText.isEmpty ||
-            product.productName.lowercased().contains(searchText.lowercased()) ||
-            product.productType.lowercased().contains(searchText.lowercased())
+            product.productName.lowercased().contains(searchText.lowercased()) 
+           
         }
         
       
@@ -54,10 +54,13 @@ struct ProductView: View {
     }
     
     var body: some View {
+        HeaderView()
         NavigationStack {
+           
             VStack {
-                
+           
                 ScrollView {
+
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(filteredProducts, id: \.id) { product in
                             VStack(alignment: .leading) {
@@ -136,6 +139,7 @@ struct ProductView: View {
                     }
                 }
             }
+            
         }
     }
 }

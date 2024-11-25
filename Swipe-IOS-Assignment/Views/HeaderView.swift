@@ -3,15 +3,11 @@ import SwiftUI
 struct HeaderView: View {
     var body: some View {
         HStack {
-          
-            Spacer()
-            
-       
-            Text("Products")
+            Text("Add New Product")
                 .font(.title)
                 .fontWeight(.bold)
             
-      
+            Spacer()
             Button(action: {
                 print("Add new product")
             }) {
@@ -24,7 +20,7 @@ struct HeaderView: View {
         .padding()
         .background(Color.red)
         .cornerRadius(10)
-        .ignoresSafeArea(edges: .top)
+      
     }
 }
 
