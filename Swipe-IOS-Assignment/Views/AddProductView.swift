@@ -47,10 +47,6 @@ struct AddProductView: View {
     }
 }
 
-struct AddProductView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            AddProductView()
-        }
-    }
+#Preview {
+    AddProductView()
 }
